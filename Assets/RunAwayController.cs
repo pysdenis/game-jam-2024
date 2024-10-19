@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class BakerController : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Rychlost pohybu (stejná jako hráčova)
+    public float moveSpeed = 5f; // Rychlost pohybu
     private float adjustedSpeed; // Upravená rychlost pekaře (o 1/4 pomalejší)
-    public Rigidbody2D rb; // Reference na Rigidbody2D
-    public Animator animator; // Reference na Animator
+    private Rigidbody2D rb; // Reference na Rigidbody2D
+    private Animator animator; // Reference na Animator
 
     private Vector2 moveDirection; // Směr pohybu
     public Transform player; // Reference na hráče
@@ -23,9 +23,11 @@ public class BakerController : MonoBehaviour
         Vector2 directionToPlayer = transform.position - player.position;
         moveDirection = directionToPlayer.normalized;
 
-        // Nastavení parametru Speed v Animatoru
-        animator.SetFloat("Horizontal", moveDirection.x);
+        // Nastavení parametru pro vertikální a horizontální pohyb
         animator.SetFloat("Vertical", moveDirection.y);
+        animator.SetFloat("Horizontal", moveDirection.x);
+
+        // Nastavení parametru rychlosti (když pekař utíká)
         animator.SetFloat("Speed", moveDirection.magnitude);
     }
 
@@ -33,7 +35,7 @@ public class BakerController : MonoBehaviour
     {
         // Pekař se pohybuje pouze pokud je hráč v jeho blízkosti
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        if (distanceToPlayer < 10f) // Pekař začne utíkat, pokud je hráč blízko (lze upravit vzdálenost)
+        if (distanceToPlayer < 10f) // Pekař začne utíkat, pokud je hráč blízko
         {
             rb.MovePosition(rb.position + moveDirection * (adjustedSpeed * Time.fixedDeltaTime));
         }
