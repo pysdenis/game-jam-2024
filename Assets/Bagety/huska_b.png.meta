@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      huska_b_0: -201979594389938852
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

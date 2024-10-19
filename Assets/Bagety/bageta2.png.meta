@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bageta2_0: -748853572260441134
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
