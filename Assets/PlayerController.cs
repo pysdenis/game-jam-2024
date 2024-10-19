@@ -15,10 +15,17 @@ public class PlayerMovement : MonoBehaviour
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
 
-        // Nastavení animací pro pohyb (animátor aktualizuje pohyb na základě směru a rychlosti)
-        animator.SetFloat("Horizontal", moveInput.x);
-        animator.SetFloat("Vertical", moveInput.y);
-        animator.SetFloat("Speed", moveInput.sqrMagnitude);
+        // Kontrola, zda se postava pohybuje, a nastavení animací dle směru
+        if (moveInput != Vector2.zero)
+        {
+            animator.SetFloat("Horizontal", moveInput.x);
+            animator.SetFloat("Vertical", moveInput.y);
+            animator.SetFloat("Speed", moveInput.sqrMagnitude);
+        }
+        else
+        {
+            animator.SetFloat("Speed", 0);
+        }
 
         // Kontrola kopání
         if (Input.GetKeyDown(KeyCode.E) && !isKicking)
@@ -41,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     void TriggerKick()
     {
         // Nastavení zpoždění kopání
-        Invoke("StopKicking", 0.5f);  // Časový úsek pro kopnutí (např. 0.5s)
+        Invoke("StopKicking", 0.5f); 
     }
 
     void StopKicking()
